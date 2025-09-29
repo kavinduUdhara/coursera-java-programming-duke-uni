@@ -1,5 +1,8 @@
 import edu.duke.*;
 import java.io.File;
+import java.io.FilenameFilter;
+
+import javax.annotation.processing.FilerException;
 
 public class PerimeterAssignmentRunner {
     public double getPerimeter (Shape s) {
@@ -25,38 +28,71 @@ public class PerimeterAssignmentRunner {
         for(Point currPoint : s.getPoints()){
             i = i + 1;
         }
-        System.out.println(i);
         return i;
     }
 
     public double getAverageLength(Shape s) {
         double count = getNumPoints(s);
         double totalDis = 0;
+        Point prevPoint = s.getLastPoint();
         for (Point currPoint : s.getPoints()){
-            
+            totalDis = totalDis + prevPoint.distance(currPoint);
+            prevPoint = currPoint;
         }
-        return 0.0;
+        return totalDis / count;
     }
 
     public double getLargestSide(Shape s) {
-        // Put code here
-        return 0.0;
+    double largestSide = 0;
+    Point prevPoint = s.getLastPoint();
+    for (Point currPoint : s.getPoints()) {
+        double dis = prevPoint.distance(currPoint);
+        if (dis > largestSide) {
+            largestSide = dis;
+        }
+        prevPoint = currPoint; // <-- crucial update
     }
+    return largestSide;
+}
+
 
     public double getLargestX(Shape s) {
-        // Put code here
-        return 0.0;
+        int largestX = 0;
+        for (Point currPoint : s.getPoints()){
+            int x = currPoint.getX();
+            if (largestX < x){
+                largestX = x;
+            }
+        }
+        return largestX;
     }
 
-    public double getLargestPerimeterMultipleFiles() {
-        // Put code here
-        return 0.0;
+    public double getLargestPerimeterMultipleFiles(String[] Files) {
+        double LargestPerimeter = 0;
+        for (String FileName : Files){
+            FileResource fr = new FileResource(FileName);
+            Shape s = new Shape(fr);
+            double perimeter = getPerimeter(s);
+            if (LargestPerimeter < perimeter){
+                LargestPerimeter = perimeter;
+            }
+        }
+        return LargestPerimeter;
     }
 
-    public String getFileWithLargestPerimeter() {
-        // Put code here
-        File temp = null;    // replace this code
-        return temp.getName();
+    public String getFileWithLargestPerimeter(String[] Files) {
+        double LargestPerimeter = 0;
+        String fn= "";
+        for (String FileName : Files){
+            FileResource fr = new FileResource(FileName);
+            Shape s = new Shape(fr);
+            double perimeter = getPerimeter(s);
+            if (LargestPerimeter < perimeter){
+                LargestPerimeter = perimeter;
+                fn = FileName;
+            }
+        }
+        return fn;
     }
 
     public void testPerimeter () {
@@ -66,12 +102,12 @@ public class PerimeterAssignmentRunner {
         System.out.println("perimeter = " + length);
     }
     
-    public void testPerimeterMultipleFiles() {
-        // Put code here
+    public void testPerimeterMultipleFiles(String[] Files) {
+        System.out.println(getLargestPerimeterMultipleFiles(Files));
     }
 
-    public void testFileWithLargestPerimeter() {
-        // Put code here
+    public void testFileWithLargestPerimeter(String[] Files) {
+        System.out.println(getFileWithLargestPerimeter(Files));
     }
 
     // This method creates a triangle that you can use to test your other methods
@@ -100,6 +136,13 @@ public class PerimeterAssignmentRunner {
         //pr.testPerimeter();
         FileResource fr = new FileResource("datatest1.txt");
         Shape s = new Shape(fr);
-        pr.getNumPoints(s);
+        int totalPoints = pr.getNumPoints(s);
+        double avgLen = pr.getAverageLength(s);
+        double largestSide = pr.getLargestSide(s);
+        double perimeter = pr.getPerimeter(s);
+        System.out.printf("perimeter: %.2f avgLen: %.2f largestSide: %.2f%n", perimeter, avgLen, largestSide);
+
+        System.out.println("__________");
+        pr.testFileWithLargestPerimeter(new String[] {"example1.txt", "example2.txt", "example3.txt", "example4.txt"});
     }
 }
