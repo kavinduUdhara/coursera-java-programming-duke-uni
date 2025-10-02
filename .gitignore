@@ -36,3 +36,6 @@ buildNumber.properties
 # OS files
 .DS_Store
 Thumbs.db
+coursera/src/main/java/tasks/findMaxTemp/data/2012
+coursera/src/main/java/tasks/findMaxTemp/data/2013
+coursera/src/main/java/tasks/findMaxTemp/data/2014
