@@ -57,20 +57,24 @@ public class CountiresExportData {
 
   public static void main(String[] args){
     CountiresExportData ce = new CountiresExportData();
-    CSVParser parser = ce.readFile("coursera\\src\\main\\java\\tasks\\csvprocessing\\exportData\\exportsmall.csv");
-    String result = ce.countryInfo(parser, "Macedonia");
-    System.out.println(result);
-    System.out.format("%nlistExports ________________________________%n");
-    CSVParser parser2 = ce.readFile("coursera\\src\\main\\java\\tasks\\csvprocessing\\exportData\\exportsmall.csv");
-    ce.listExporters(parser2, "coffee");
-    System.out.format("%nlistExportsTwoProducts _____________________________________%n");
-    CSVParser parser3 = ce.readFile("coursera\\src\\main\\java\\tasks\\csvprocessing\\exportData\\exportsmall.csv");
-    ce.listExportsTwoProducts(parser3, "tea", "sugar");
-    CSVParser parser4 = ce.readFile("coursera\\src\\main\\java\\tasks\\csvprocessing\\exportData\\exportsmall.csv");
-    int count = ce.numberOfExports(parser4, "coffee");
-    System.out.format("%nnumberOfExports ____________________________________%n%d%n", count);
+    // CSVParser parser = ce.readFile("coursera\\src\\main\\java\\tasks\\csvprocessing\\exportData\\exportdata.csv");
+    // String result = ce.countryInfo(parser, "Nauru");
+    // System.out.println(result);
+
+    // System.out.format("%nlistExports ________________________________%n");
+    // CSVParser parser2 = ce.readFile("coursera\\src\\main\\java\\tasks\\csvprocessing\\exportData\\exportdata.csv");
+    // ce.listExporters(parser2, "cocoa");
+
+    // System.out.format("%nlistExportsTwoProducts _____________________________________%n");
+    // CSVParser parser3 = ce.readFile("coursera\\src\\main\\java\\tasks\\csvprocessing\\exportData\\exportdata.csv");
+    // ce.listExportsTwoProducts(parser3, "cotton", "flowers");
+
+    // CSVParser parser4 = ce.readFile("coursera\\src\\main\\java\\tasks\\csvprocessing\\exportData\\exportdata.csv");
+    // int count = ce.numberOfExports(parser4, "cocoa");
+    // System.out.format("%nnumberOfExports ____________________________________%n%d%n", count);
+
     System.out.format("%nbigExports _________________________________________%n");
-    CSVParser parser5 = ce.readFile("coursera\\src\\main\\java\\tasks\\csvprocessing\\exportData\\exportsmall.csv");
-    ce.bigExports(parser5, "$421,000,000");
+    CSVParser parser5 = ce.readFile("coursera\\src\\main\\java\\tasks\\csvprocessing\\exportData\\exportdata.csv");
+    ce.bigExports(parser5, "$999,999,999,999");
   }
 }
